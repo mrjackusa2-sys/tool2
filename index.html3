@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>All-in-One Image & PDF Tools — Free Online Toolkit</title>
+  <meta name="description" content="Free online tools including image compressors, PDF converters, mergers, splitters, editors and more. Fast, responsive, privacy‑first toolkit.">
+  <style>
+    :root{
+      --brand:#2563eb;
+      --bg:#f8fafc;
+      --text:#0f172a;
+      --muted:#64748b;
+      --card:#ffffff;
+      --radius:16px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);}
+    header{background:#fff;padding:20px 0;box-shadow:0 4px 20px rgba(0,0,0,0.05);position:sticky;top:0;z-index:50}
+    .container{max-width:1200px;margin:auto;padding:0 16px}
+    nav{display:flex;justify-content:space-between;align-items:center}
+    nav h1{font-size:1.5rem;color:var(--brand)}
+    .hero{padding:60px 0;text-align:center}
+    .hero h2{font-size:2rem;margin-bottom:12px}
+    .hero p{color:var(--muted);max-width:600px;margin:auto;font-size:1rem}
+    .tools-grid{margin-top:40px;display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:600px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+    .tool-card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 8px 25px rgba(0,0,0,0.05);transition:.25s;cursor:pointer;display:flex;flex-direction:column;gap:10px}
+    .tool-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,0,0,0.1)}
+    .tool-card-icon{width:52px;height:52px;border-radius:12px;background:rgba(37,99,235,0.1);display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:24px}
+    .tool-card h3{font-size:1.1rem}
+    .tool-card p{font-size:0.9rem;color:var(--muted)}
+    footer{margin-top:50px;padding:20px 0;text-align:center;font-size:0.9rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <h1>🛠️ SmartTools</h1>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>All-in-One Image & PDF Tools</h2>
+      <p>Fast, secure and completely free online tools to compress, convert, merge, split and edit your images and PDF documents — all in your browser.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container tools-grid">
+
+      <!-- Image Tools -->
+      <a href="img-comprs.html2" class="tool-card" style="text-decoration:none;color:inherit;">
+<div class="tool-card-icon">🖼️</div>
+<h3>Image Compressor</h3>
+<p>Compress images quickly without losing quality. Ideal for web uploads.</p>
+</a>
+
+      <div class="tool-card">
+        <div class="tool-card-icon">🔄</div>
+        <h3>Image Converter</h3>
+        <p>Convert between JPG, PNG, WebP and more, instantly.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-icon">📏</div>
+        <h3>Image Resizer</h3>
+        <p>Resize images to exact dimensions in seconds.</p>
+      </div>
+
+      <!-- PDF Tools -->
+      <div class="tool-card">
+        <div class="tool-card-icon">📄</div>
+        <h3>PDF Compressor</h3>
+        <p>Reduce PDF file size online while keeping clarity intact.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-icon">➕</div>
+        <h3>Merge PDF</h3>
+        <p>Combine multiple PDF files into one clean document.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-icon">✂️</div>
+        <h3>Split PDF</h3>
+        <p>Separate pages from any PDF document effortlessly.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-icon">📝</div>
+        <h3>PDF to Word</h3>
+        <p>Convert PDF files to editable Word documents easily.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-icon">🔁</div>
+        <h3>Word to PDF</h3>
+        <p>Turn Word documents into high‑quality PDFs.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-icon">🔍</div>
+        <h3>PDF OCR Extractor</h3>
+        <p>Extract text from scanned PDFs using advanced OCR.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2025 SmartTools — Free Online Image & PDF Toolkit
+  </footer>
+</body>
+</html>
