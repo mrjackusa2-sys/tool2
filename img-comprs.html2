@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fast Image Compressor — Resize & Optimize Images Online</title>
+
+  <!-- SEO meta -->
+  <meta name="description" content="Compress and optimize images in your browser. Choose compression level, resize by width/height, preview and download. Built for speed and SEO.">
+  <meta name="keywords" content="image compressor, image optimization, compress images online, resize image, web image optimizer">
+  <link rel="canonical" href="https://example.com/image-compressor">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fast Image Compressor — Resize & Optimize Images Online">
+  <meta property="og:description" content="Compress and optimize images in your browser. Choose compression level, resize and download compressed images.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/image-compressor">
+  <meta property="og:image" content="https://example.com/og-image.png">
+
+  <!-- Structured data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Fast Image Compressor",
+    "url": "https://example.com/image-compressor",
+    "description": "Compress and optimize images in your browser."
+  }
+  </script>
+
+  <!-- Minimal CSS: responsive, accessible -->
+  <style>
+    :root{--accent:#1f6feb;--muted:#6b7280;--card:#ffffff}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#0f172a;background:#f8fafc}
+    .container{max-width:1100px;margin:24px auto;padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:1.25rem;margin:0}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+    @media(min-width:960px){.grid{grid-template-columns:2fr 1fr}}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(12,15,20,0.06)}
+    .controls{display:flex;flex-direction:column;gap:12px}
+    .row{display:flex;gap:12px;align-items:center}
+    .row .col{flex:1}
+    label{font-size:0.9rem;color:var(--muted);display:block;margin-bottom:6px}
+    input[type='range']{width:100%}
+    input[type='number'], select, input[type='text']{width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ef}
+    button{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+    button.secondary{background:transparent;color:var(--accent);border:1px solid rgba(31,111,235,0.12)}
+    img.preview{max-width:100%;height:auto;border-radius:8px;display:block}
+    .meta{font-size:0.9rem;color:var(--muted)}
+    .ads{background:#f1f5f9;border:1px dashed #dbeafe;padding:12px;border-radius:8px;text-align:center}
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:0.85rem}
+    .hidden{display:none}
+    .flex{display:flex;gap:12px;align-items:center}
+    .stack{display:flex;flex-direction:column;gap:8px}
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <header>
+      <div class="brand">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2" stroke="#1f6feb" stroke-width="1.5"/></svg>
+        <div>
+          <h1>Fast Image Compressor</h1>
+          <div class="meta">Compress images instantly — client-side, private & fast</div>
+        </div>
+      </div>
+
+      <!-- Header ad slot (designated) -->
+      <div class="ads card" id="ad-header">
+        <!-- Google AdSense: paste Client ID & Ad Unit ID below and press "Apply AdSense IDs" -->
+        <div style="font-size:0.85rem;color:#374151">Ads — header</div>
+        <div id="ad-header-slot" style="margin-top:8px"></div>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <div class="controls">
+          <div>
+            <label for="file">Choose image(s)</label>
+            <input id="file" type="file" accept="image/*" multiple>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="quality">Compression quality: <span id="qualityVal">0.8</span></label>
+              <input id="quality" type="range" min="0.1" max="1" step="0.01" value="0.8">
+            </div>
+            <div style="width:120px">
+              <label for="format">Format</label>
+              <select id="format" aria-label="Select output format">
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/webp">WebP (recommended)</option>
+                <option value="image/png">PNG</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="maxWidth">Max width (px) — keep empty to preserve</label>
+              <input id="maxWidth" type="number" min="1" placeholder="e.g. 1920">
+            </div>
+            <div style="width:140px">
+              <label>&nbsp;</label>
+              <div class="flex">
+                <button id="compressBtn">Compress</button>
+                <button id="clearBtn" class="secondary">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="meta">Tips: Use WebP for best compression if supported. Lower quality reduces file size but may reduce visual fidelity.</div>
+          </div>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid #eef2ff">
+
+        <section id="results">
+          <div id="list" class="stack"></div>
+        </section>
+      </article>
+
+      <aside>
+        <div class="card">
+          <h2 style="margin-top:0">AdSense Setup</h2>
+          <p class="meta">Enter your AdSense <strong>Client ID</strong> (ca-pub-XXXXXXXXXXXXX) and <strong>Ad Unit ID</strong> (numeric slot) below and click <em>Apply AdSense IDs</em>. The page will insert ad units in designated ad slots.</p>
+
+          <label for="adsenseClient">AdSense Client ID</label>
+          <input id="adsenseClient" type="text" placeholder="ca-pub-1234567890123456">
+          <label for="adsenseSlot">Ad Unit ID (slot)</label>
+          <input id="adsenseSlot" type="text" placeholder="1234567890">
+          <div style="margin-top:10px" class="flex">
+            <button id="applyAds">Apply AdSense IDs</button>
+          </div>
+
+          <hr>
+
+          <div class="ads" id="ad-side">
+            <div style="font-size:0.85rem;color:#374151">Ads — sidebar</div>
+            <div id="ad-side-slot" style="margin-top:8px"></div>
+          </div>
+
+          <hr>
+
+          <h3 style="margin-bottom:6px">Why client-side?</h3>
+          <p class="meta">All image processing happens in your browser — files are not uploaded to servers, preserving privacy and speed.</p>
+        </div>
+
+        <div style="height:16px"></div>
+
+        <div class="card ads" id="ad-article">
+          <div style="font-size:0.85rem;color:#374151">Ads — article</div>
+          <div id="ad-article-slot" style="margin-top:8px"></div>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <div class="meta">Built with privacy-first client-side compression • SEO-friendly • <a href="#" style="color:var(--accent)">Privacy</a> • <a href="#" style="color:var(--accent)">Terms</a></div>
+    </footer>
+  </main>
+
+  <!-- Core JS (deferred) -->
+  <script>
+  // Utility: human readable bytes
+  function humanFileSize(bytes){
+    if (bytes === 0) return '0 B';
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    const sizes = ['B','KB','MB','GB','TB'];
+    return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i];
+  }
+
+  // DOM refs
+  const fileInput = document.getElementById('file');
+  const qualityInput = document.getElementById('quality');
+  const qualityVal = document.getElementById('qualityVal');
+  const formatSelect = document.getElementById('format');
+  const maxWidthInput = document.getElementById('maxWidth');
+  const compressBtn = document.getElementById('compressBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const list = document.getElementById('list');
+
+  qualityInput.addEventListener('input', ()=> qualityVal.textContent = qualityInput.value);
+
+  let files = [];
+  fileInput.addEventListener('change', (e)=>{
+    files = Array.from(e.target.files || []);
+    renderSelectedFiles();
+  });
+
+  function renderSelectedFiles(){
+    list.innerHTML = '';
+    if (!files.length) return list.innerHTML = '<div class="meta">No files selected</div>';
+    files.forEach((file, idx)=>{
+      const row = document.createElement('div');
+      row.className = 'card';
+      row.innerHTML = `
+        <div class="row">
+          <div style="width:110px"><img class="preview" id="preview-${idx}" alt="Preview"></div>
+          <div class="col">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><strong>${file.name}</strong><div class="meta">Type: ${file.type || 'n/a'}</div></div>
+              <div class="meta">${humanFileSize(file.size)}</div>
+            </div>
+            <div id="controls-${idx}" style="margin-top:8px"></div>
+          </div>
+        </div>
+      `;
+      list.appendChild(row);
+      const img = document.getElementById(`preview-${idx}`);
+      const reader = new FileReader();
+      reader.onload = ()=> img.src = reader.result;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  clearBtn.addEventListener('click', ()=>{ files = []; fileInput.value = ''; renderSelectedFiles(); });
+
+  // Compress function per file
+  async function compressFile(file, quality, type, maxWidth){
+    // Load image
+    const imageBitmap = await createImageBitmap(file);
+    let {width, height} = imageBitmap;
+    if (maxWidth && width > maxWidth){
+      const scale = maxWidth / width;
+      width = Math.round(width * scale);
+      height = Math.round(height * scale);
+    }
+    const canvas = new OffscreenCanvas ? new OffscreenCanvas(width, height) : document.createElement('canvas');
+    canvas.width = width; canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(imageBitmap, 0, 0, width, height);
+
+    // toBlob with quality only works for lossy formats; for PNG quality is ignored by browsers
+    const blob = await new Promise(resolve => canvas.convertToBlob ? canvas.convertToBlob({type, quality}) : canvas.toBlob(resolve, type, quality));
+    return blob;
+  }
+
+  compressBtn.addEventListener('click', async ()=>{
+    if (!files.length) return alert('Please select at least one image.');
+    compressBtn.disabled = true; compressBtn.textContent = 'Compressing...';
+    const quality = parseFloat(qualityInput.value);
+    const type = formatSelect.value;
+    const maxWidth = maxWidthInput.value ? parseInt(maxWidthInput.value,10) : null;
+
+    for (let i=0;i<files.length;i++){
+      try{
+        const file = files[i];
+        const before = file.size;
+        const blob = await compressFile(file, quality, type, maxWidth);
+        const after = blob.size;
+
+        // Show result card
+        const resultCard = document.createElement('div');
+        resultCard.className = 'card';
+        const url = URL.createObjectURL(blob);
+        resultCard.innerHTML = `
+          <div style="display:flex;gap:12px;align-items:center">
+            <img class="preview" src="${url}" alt="compressed preview" style="width:120px">
+            <div style="flex:1">
+              <div><strong>${file.name}</strong></div>
+              <div class="meta">Before: ${humanFileSize(before)} • After: ${humanFileSize(after)} • Reduction: ${Math.round((1-(after/before))*100)}%</div>
+              <div style="margin-top:8px" class="flex">
+                <a href="${url}" download="${file.name.replace(/\.[^.]+$/, '')}_compressed${getExtensionForType(type)}"><button>Download</button></a>
+                <button class="secondary" data-url="${url}" onclick="(function(u){navigator.clipboard&&navigator.clipboard.writeText(u)} )('${url}')">Copy URL</button>
+              </div>
+            </div>
+          </div>
+        `;
+        list.appendChild(resultCard);
+      }catch(err){
+        console.error('Compress error',err);
+        list.appendChild(Object.assign(document.createElement('div'),{className:'card',innerHTML:'<div class="meta">Error compressing file: '+err.message+'</div>'}));
+      }
+    }
+
+    compressBtn.disabled = false; compressBtn.textContent = 'Compress';
+  });
+
+  function getExtensionForType(type){
+    if (type.includes('webp')) return '.webp';
+    if (type.includes('png')) return '.png';
+    return '.jpg';
+  }
+
+  // ---- AdSense dynamic insertion ----
+  const applyAdsBtn = document.getElementById('applyAds');
+  applyAdsBtn.addEventListener('click', ()=>{
+    const client = document.getElementById('adsenseClient').value.trim();
+    const slot = document.getElementById('adsenseSlot').value.trim();
+    if(!client) return alert('Please enter your AdSense Client ID (ca-pub-...).');
+    // Insert script tag with client param if not already present
+    if(!document.querySelector('script[data-adsense-client]')){
+      const s = document.createElement('script');
+      s.async = true;
+      s.setAttribute('data-adsense-client', client);
+      s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}`;
+      s.crossOrigin = 'anonymous';
+      document.head.appendChild(s);
+    }
+
+    // Create ad slots in each designated container
+    [['ad-header-slot', slot], ['ad-side-slot', slot], ['ad-article-slot', slot]].forEach(([containerId, slotId])=>{
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      const ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.display = 'block';
+      ins.setAttribute('data-ad-client', client);
+      if(slotId) ins.setAttribute('data-ad-slot', slotId);
+      ins.setAttribute('data-ad-format', 'auto');
+      ins.setAttribute('data-full-width-responsive','true');
+      container.appendChild(ins);
+      // push
+      try{ (adsbygoogle = window.adsbygoogle || []).push({}); }catch(e){ console.warn('adsbygoogle push failed', e); }
+    });
+
+    alert('AdSense placeholders inserted. If ads do not appear, ensure your AdSense account and units are active and that Google allows serving ads on local files.');
+  });
+
+  // Accessibility: keyboard shortcut to open file picker: Ctrl+O
+  document.addEventListener('keydown', (e)=>{
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='o'){
+      e.preventDefault(); fileInput.click();
+    }
+  });
+
+  // Initial render
+  renderSelectedFiles();
+  </script>
+</body>
+</html>
